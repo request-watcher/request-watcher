@@ -1,0 +1,19 @@
+{
+  "name": "request-watcher",
+  "version": "0.0.0",
+  "description": "request-watcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lisiur/request-watcher.git"
+  },
+  "author": "lisiur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lisiur/request-watcher/issues"
+  },
+  "homepage": "https://github.com/lisiur/request-watcher#readme"
+}
