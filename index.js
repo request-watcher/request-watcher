@@ -21,10 +21,12 @@ const watcher = function({url, username, appname, labels = []}) {
   const uuid = md5(new Date().toString() + Math.random())
   return {
     emitReq: function(request) {
-      return _emit({url, username, appname, uuid, labels})({request})
+      let {url, headers, params, method, queries} = request
+      return _emit({url, username, appname, uuid, labels})({url, headers, method, queries})
     },
     emitRes: function(response) {
-      return _emit({url, username, appname, uuid, labels})({response})
+      let {status, data, headers} = response
+      return _emit({url, username, appname, uuid, labels})({status, data, headers})
     }
   }
 }
