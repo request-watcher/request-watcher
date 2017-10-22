@@ -64,7 +64,7 @@ queries           | Object (optional)    | query string params
 params            | Object (optional)    | 在 body 中的请求参数
 
 
-responseParams 说明
+#### responseParams 说明
 
 > responseParams 是一个对象，包含如下属性
 
