@@ -22,11 +22,13 @@ const watcher = function({watcherServerUrl, username, appname, labels = []}) {
   return {
     emitReq: function(request) {
       let {url, headers, params, method, queries} = request
-      return _emit({url: watcherServerUrl, username, appname, uuid, labels})({url, headers, params, method, queries})
+      request = {url, headers, params, method, queries}
+      return _emit({url: watcherServerUrl, username, appname, uuid, labels})({request})
     },
     emitRes: function(response) {
       let {status, data, headers} = response
-      return _emit({url: watcherServerUrl, username, appname, uuid, labels})({status, data, headers})
+      response = {status, data, headers}
+      return _emit({url: watcherServerUrl, username, appname, uuid, labels})({response})
     }
   }
 }
