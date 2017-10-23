@@ -79,7 +79,32 @@ status            | Integer (optional)   | response status
 headers           | Object (optional)    | response headers
 data              | Object (optional)    | response data
 
+### Watch Logger
 
+```javascript
+const watcher = require('request-watcher')
+const watcherParams = {
+  path: 'http://localhost:3000/receiver',
+  username: 'username',
+  appname: 'appname',
+  labels: [],
+}
+
+const { emitLog } = watcher(watcherParams)
+
+// emitLog :: Object -> Promise 
+emitReq(loggerParams)
+
+```
+
+#### loggerParams
+
+> loggerParams is an Object Containing the following properties
+
+Args              | Type                 | Description
+------------------|----------------------|---------
+title             | String (optional)    | logger title
+content           | Any (optional)       | logger content
 ## MORE
 
 - **Note that each time you monitor a request, you need to use the `watcher` function to regenerate the matching `emitReq` and `emitRes`**
