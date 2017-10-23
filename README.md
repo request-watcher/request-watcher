@@ -53,7 +53,7 @@ Args              | Type                                | Description
 path              | String (path or origin required one)| watcher server path(need to manually add '/receiver' after origin) 
 origin            | String (path or origin required one) | watcher origin (will automatically add '/receiver') 
 username          | String (required)                    | one of the request markers
-appname           | String (require)                     | one of the request markers
+appname           | String (required)                     | one of the request markers
 labels            | \[String\] (optional)                | add extra label to request to differentiate
 
 #### requestParams
