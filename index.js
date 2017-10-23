@@ -24,7 +24,7 @@ const watcher = function({path, origin, username, appname, labels = []}) {
     emitReq: function(request) {
       let {url, headers, params, method, queries} = request
       request = {url, headers, params, method, queries}
-      return _emit({path, origin, username, appname, uuid, labels})({request})
+      return _emit({path, username, appname, uuid, labels})({request})
     },
     emitRes: function(response) {
       let {status, data, headers} = response
