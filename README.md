@@ -23,7 +23,7 @@ server.listen(3000)
 ```bash
 node server.js
 ```
-> **The app requires node v7.6.0 or higher for ES2015 and async function support**
+> **The server requires node v7.6.0 or higher for ES2015 and async function support**
 
 ### Watch Request
 
