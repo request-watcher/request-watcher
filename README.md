@@ -46,7 +46,8 @@ emitRes(responseParams)
 
 参数               | 类型                 | 说明
 -------------     | -------------        | --------
-watcherServerUrl  | String (required)    | watcher 服务器地址(最后要加上/receiver) 
+path              | String (path or origin required one)    | watcher 服务器地址(最后要加上/receiver) 
+origin            | String (path or origin required one) | watcher origin (会自动加上/receiver)
 username          | String (required)    | 请求标志符之一
 appname           | String (require)     | 请求标志符之一
 labels            | \[String\] (optional)| 为请求添加额外 label 以区分
