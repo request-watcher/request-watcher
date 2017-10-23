@@ -82,7 +82,7 @@ data              | Object (optional)    | response data
 
 ## MORE
 
-- **Note that each time you monitor a request, you need to use the `watcher` function to regenerate the matching `emitreq` and `emitres`**
+- **Note that each time you monitor a request, you need to use the `watcher` function to regenerate the matching `emitReq` and `emitRes`**
 
 - Clicking the `Console` button outputs the data to the browser's console and obtains a global variable `$it` pointing to that data
 ## Example
