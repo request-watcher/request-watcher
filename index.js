@@ -1,17 +1,17 @@
 const axios = require('axios')
 const md5 = require('md5')
 
-const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, labels = [] }) {
+const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [] }) {
   return axios.post(path, {
-    username, appname, createdAt, uuid, request, response, labels
+    username, appname, createdAt, uuid, request, response, logger, labels
   })
 }
 
 // 自动创建 createdAt
 const _emit = function({path, username, appname, uuid, labels = []}) {
-  return function({request, response}) {
+  return function({request, response, logger}) {
     const createdAt = new Date()
-    return __emit__({ path, username, appname, createdAt, uuid, request, response, labels })
+    return __emit__({ path, username, appname, createdAt, uuid, request, response, logger, labels })
   }
 }
 
@@ -30,6 +30,11 @@ const watcher = function({path, origin, username, appname, labels = []}) {
       let {status, data, headers} = response
       response = {status, data, headers}
       return _emit({path, username, appname, uuid, labels})({response})
+    },
+    emitLog: function(logger) {
+      let {title, content} = logger
+      logger = {title, content}
+      return _emit({path, username, appname, uuid, labels})({logger})
     }
   }
 }
