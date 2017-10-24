@@ -19,7 +19,13 @@ const _emit = function({path, username, appname, uuid, labels = []}) {
 // 自动创建 uuid
 const watcher = function({path, origin, username, appname, labels = []}) {
   const uuid = md5(new Date().toString() + Math.random())
-  path = path || origin + '/receiver'
+  if (!path) { // 没指定绝对路径
+    if (origin) { // 指定服务器 origin
+      path = origin + '/receiver'
+    } else { // 没指定服务器 origin
+      path = 'http://0.0.0.0:2333/receiver' // 默认
+    }
+  }
   return {
     emitReq: function(request) {
       let {url, headers, params, method, queries} = request

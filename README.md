@@ -1,6 +1,6 @@
 # request-watcher
 
-An util for [request-watcher-server](https://github.com/lisiur/request-watcher-webapp/tree/master/server)
+An util for [request-watcher-server]
 
 ![](https://lisiur.com/2017/10/22/%E5%85%88%E5%8D%A0%E4%B8%AA%E5%9D%91/1.png)
 ![](https://lisiur.com/2017/10/22/%E5%85%88%E5%8D%A0%E4%B8%AA%E5%9D%91/2.png)
@@ -14,6 +14,10 @@ yarn add request-watcher request-watcher-server -D
 
 ### Start Server
 
+> **The server requires node v7.6.0 or higher for ES2015 and async function support**
+
+- use file
+
 ```javascript
 // server.js
 const server = require('request-watcher-server')
@@ -23,14 +27,22 @@ server.listen(3000)
 ```bash
 node server.js
 ```
-> **The server requires node v7.6.0 or higher for ES2015 and async function support**
+
+- use cli
+
+```bash
+npm install -g request-watcher-server
+request-watcher-server -p 3000
+```
+
+> default address is 0.0.0.0:2333
+> you can use `request-watcher-server -h` to get more help
 
 ### Watch Request
 
 ```javascript
 const watcher = require('request-watcher')
 const watcherParams = {
-  path: 'http://localhost:3000/receiver',
   username: 'username',
   appname: 'appname',
   labels: [],
@@ -50,11 +62,11 @@ emitRes(responseParams)
 
 Args              | Type                                | Description
 -------------     | -------------                       | --------
-path              | String (path or origin required one)| watcher server path(need to manually add '/receiver' after origin) 
-origin            | String (path or origin required one) | watcher origin (will automatically add '/receiver') 
-username          | String (required)                    | one of the request markers
-appname           | String (required)                     | one of the request markers
-labels            | \[String\] (optional)                | add extra label to request to differentiate
+path              | String (optional)                   | watcher server path(need to manually add '/receiver' after origin) 
+origin            | String (optional)                   | watcher origin (will automatically add '/receiver') 
+username          | String (required)                   | one of the request markers
+appname           | String (required)                   | one of the request markers
+labels            | \[String\] (optional)               | add extra label to request to differentiate
 
 #### requestParams
 
@@ -84,7 +96,6 @@ data              | Object (optional)    | response data
 ```javascript
 const watcher = require('request-watcher')
 const watcherParams = {
-  path: 'http://localhost:3000/receiver',
   username: 'username',
   appname: 'appname',
   labels: [],
@@ -93,7 +104,7 @@ const watcherParams = {
 const { emitLog } = watcher(watcherParams)
 
 // emitLog :: Object -> Promise 
-emitReq(loggerParams)
+emitLog(loggerParams)
 
 ```
 
@@ -105,6 +116,7 @@ Args              | Type                 | Description
 ------------------|----------------------|---------
 title             | String (optional)    | logger title
 content           | Any (optional)       | logger content
+
 ## MORE
 
 - **Note that each time you monitor a request, you need to use the `watcher` function to regenerate the matching `emitReq` and `emitRes`**
