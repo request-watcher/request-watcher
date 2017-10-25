@@ -1,5 +1,6 @@
 const axios = require('axios')
 const md5 = require('md5')
+const { GLOBAL_CONFIG, setConfig } = require('./config')
 
 const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [] }) {
   return axios.post(path, {
@@ -17,15 +18,20 @@ const _emit = function({path, username, appname, uuid, labels = []}) {
 
 // 传递 path username appname labels
 // 自动创建 uuid
-const watcher = function({path, origin, username, appname, labels = []}) {
+const watcher = function({origin, username, appname, labels = []}) {
   const uuid = md5(new Date().toString() + Math.random())
-  if (!path) { // 没指定绝对路径
-    if (origin) { // 指定服务器 origin
-      path = origin + '/receiver'
-    } else { // 没指定服务器 origin
-      path = 'http://0.0.0.0:2333/receiver' // 默认
-    }
-  }
+
+  // 将 watcher.global 作为一个 config 收集器
+  watcher.global = {}
+  setConfig(watcher.global)
+
+  origin = origin || GLOBAL_CONFIG.origin
+  username = username || GLOBAL_CONFIG.username
+  appname = appname || GLOBAL_CONFIG.appname
+  labels = labels || GLOBAL_CONFIG.labels
+
+  const path = origin + '/receiver'
+
   return {
     emitReq: function(request) {
       let {url, headers, params, method, queries} = request
