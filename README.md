@@ -7,7 +7,8 @@ An util for [request-watcher-server]
 ## Install
 
 ```bash
-yarn add request-watcher request-watcher-server -D
+$ yarn add global request-watcher-server
+$ yarn add request-watcher
 ```
 
 ## Usage
@@ -16,27 +17,16 @@ yarn add request-watcher request-watcher-server -D
 
 > **The server requires node v7.6.0 or higher for ES2015 and async function support**
 
-- use file
+Once you globally installed the request-watcher-server, you will get a global cmd `request-watcher-server` and also `rws` for short.
 
-```javascript
-// server.js
-const server = require('request-watcher-server')
-server.listen(3000)
-```
+And then you can use the following cmd:
 
 ```bash
-node server.js
-```
-
-- use cli
-
-```bash
-npm install -g request-watcher-server
-request-watcher-server -p 3000
+$ rws [-a 0.0.0.0] [-p 2333]
 ```
 
 > default address is 0.0.0.0:2333
-> you can use `request-watcher-server -h` to get more help
+> you can use `rws -h` to get more help
 
 ### Watch Request
 
@@ -62,8 +52,7 @@ emitRes(responseParams)
 
 Args              | Type                                | Description
 -------------     | -------------                       | --------
-path              | String (optional)                   | watcher server path(need to manually add '/receiver' after origin) 
-origin            | String (optional)                   | watcher origin (will automatically add '/receiver') 
+origin            | String (optional)                   | watcher origin
 username          | String (required)                   | one of the request markers
 appname           | String (required)                   | one of the request markers
 labels            | \[String\] (optional)               | add extra label to request to differentiate
@@ -77,7 +66,6 @@ Args              | Type                 | Description
 url               | String (optional)    | request url
 method            | String (optional)    | request method
 headers           | Object (optional)    | request headers
-queries           | Object (optional)    | query string params
 params            | Object (optional)    | request params in body
 
 
@@ -116,6 +104,21 @@ Args              | Type                 | Description
 ------------------|----------------------|---------
 title             | String (optional)    | logger title
 content           | Any (optional)       | logger content
+
+### Global Config
+
+You can use `watcher.global` to define global params, and thus you can just use `watcher()` without passing params.
+
+```javascript
+const watcher = require('request-watcher')
+
+watcher.global.origin = 'http://127.0.0.1:8080'
+watcher.global.username = 'lisiur'
+watcher.global.appname = 'test-app'
+
+const { emitReq, emitRes } = watcher()
+const { emitLog } = watcher()
+```
 
 ## MORE
 
