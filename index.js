@@ -18,11 +18,11 @@ const _emit = function({path, username, appname, uuid, labels = []}) {
 
 // 传递 path username appname labels
 // 自动创建 uuid
-const watcher = function({origin, username, appname, labels = []}) {
+const watcher = function(params={}) {
+  let {origin, username, appname, labels = []} = params
+
   const uuid = md5(new Date().toString() + Math.random())
 
-  // 将 watcher.global 作为一个 config 收集器
-  watcher.global = watcher.global || {}
   setConfig(watcher.global)
 
   origin = origin || GLOBAL_CONFIG.origin
@@ -50,5 +50,8 @@ const watcher = function({origin, username, appname, labels = []}) {
     }
   }
 }
+
+// 将 watcher.global 作为一个 config 收集器
+watcher.global = {}
 
 module.exports = watcher
