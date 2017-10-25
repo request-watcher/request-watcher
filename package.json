@@ -1,6 +1,6 @@
 {
   "name": "request-watcher",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "request-watcher",
   "main": "index.js",
   "scripts": {
