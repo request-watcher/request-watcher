@@ -22,7 +22,7 @@ const watcher = function({origin, username, appname, labels = []}) {
   const uuid = md5(new Date().toString() + Math.random())
 
   // 将 watcher.global 作为一个 config 收集器
-  watcher.global = {}
+  watcher.global = watcher.global || {}
   setConfig(watcher.global)
 
   origin = origin || GLOBAL_CONFIG.origin
