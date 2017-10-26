@@ -54,4 +54,23 @@ const watcher = function(params={}) {
 // 将 watcher.global 作为一个 config 收集器
 watcher.global = {}
 
+watcher.use = function (watcherFunc) {
+  if (typeof watcherFunc === 'function') {
+    watcherFunc(watcher)
+  } else if (typeof watcherFunc === 'string') {
+    try {
+      var watcherFunc = require('request-watcher-' + watcherFunc)
+      if (typeof watcherFunc === 'function') {
+        watcherFunc(require('request-watcher-' + watcherFunc))
+      } else {
+        throw new Error('package is not return a function')
+      }
+    } catch (err) {
+      throw new Error('package is not supported')
+    }
+  } else {
+    throw new Error('Given arg is not supported')
+  }
+}
+
 module.exports = watcher
