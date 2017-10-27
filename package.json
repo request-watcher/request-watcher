@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lisiur/request-watcher.git"
+    "url": "git+https://github.com/request-watcher/request-watcher.git"
   },
   "author": "lisiur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lisiur/request-watcher/issues"
+    "url": "https://github.com/request-watcher/request-watcher/issues"
   },
-  "homepage": "https://github.com/lisiur/request-watcher#readme",
+  "homepage": "https://github.com/request-watcher/request-watcher#readme",
   "dependencies": {
     "axios": "^0.17.0",
     "md5": "^2.2.1",
