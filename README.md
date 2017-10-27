@@ -148,6 +148,6 @@ And then, you can just focus on your biz code without inserting redundant code b
 
 ## Example
 
-Refer to this [example](https://github.com/lisiur/request-watcher-webapp/tree/master/end-user-app-test)
+Refer to this [example](https://github.com/lisiur/request-watcher-webapp/tree/master/example)
 
 Enjoy! :)
