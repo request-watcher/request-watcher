@@ -7,8 +7,8 @@ An util for [request-watcher-server](https://github.com/lisiur/request-watcher-w
 ## Install
 
 ```bash
-$ yarn add global request-watcher-server
-$ yarn add request-watcher
+$ npm install -g request-watcher-server
+$ npm install -D request-watcher
 ```
 
 ## Usage
@@ -38,14 +38,26 @@ const watcherParams = {
   labels: [],
 }
 
+// e.g.
+// before send a request, emit the request to request-watcher-server
 const { emitReq, emitRes } = watcher(watcherParams)
-
-// emitReq :: request -> Promise 
+const requestParams = { url, params, headers, method: 'POST' }
 emitReq(requestParams)
-// emitRes :: response -> Promise
-emitRes(responseParams)
+axios.post(url, params, headers)
+  .then(res => {
+    // after get the response, emit the response to request-watcher-server
+    const { status, data, headers } = res
+    const responseParams = { status, data, headers }
+    emitRes(responseParams)
+    // your biz code bellow
+  })
+  .catch(err => {
+  })
 
 ```
+
+> **Note that each time you watch a request, you need to use the `watcher` function to regenerate the matching `emitReq` and `emitRes`**
+
 #### watcherParams
 
 > watcherParams is an Object Containing the following properties
@@ -81,17 +93,12 @@ data              | Object (optional)    | response data
 
 ### Watch Logger
 
-```javascript
-const watcher = require('request-watcher')
-const watcherParams = {
-  username: 'username',
-  appname: 'appname',
-  labels: [],
-}
+You can just emit a log to the server, like bellow:
 
+```javascript
 const { emitLog } = watcher(watcherParams)
 
-// emitLog :: Object -> Promise 
+const loggerParams = { title: 'logger', content: 'this is a log' }
 emitLog(loggerParams)
 
 ```
@@ -110,21 +117,37 @@ content           | Any (optional)       | logger content
 You can use `watcher.global` to define global params, and thus you can just use `watcher()` without passing params.
 
 ```javascript
-const watcher = require('request-watcher')
-
-watcher.global.origin = 'http://127.0.0.1:8080'
-watcher.global.username = 'lisiur'
-watcher.global.appname = 'test-app'
+watcher.global.origin = 'http://127.0.0.1:8080' // default is 'http://0.0.0.0:2333'
+watcher.global.username = 'lisiur' // default is 'username'
+watcher.global.appname = 'test-app' // default is 'appname'
 
 const { emitReq, emitRes } = watcher()
 const { emitLog } = watcher()
 ```
 
-## MORE
+## Plugins
 
-- **Note that each time you monitor a request, you need to use the `watcher` function to regenerate the matching `emitReq` and `emitRes`**
+We support plugin to simplify the configs. And now we have those plugins:
 
-- Clicking the `Console` button outputs the data to the browser's console and obtains a global variable `$it` pointing to that data
+- [request-watcher-axios](https://github.com/lisiur/request-watcher-axios)
+
+### Plugin Usage
+
+Using axios for example:
+
+```javascript
+const watcher = require('request-watcher')
+watcher.use(require('request-watcher-axios'))
+```
+
+And then, you can just focus on your biz code without inserting redundant code before or after the ajaxing code.
+
+## Eggs
+
+- Clicking the `Console` button outputs the data to the browser's console and obtains a global variable `$it` pointing to that data.
+
 ## Example
 
 Refer to this [example](https://github.com/lisiur/request-watcher-webapp/tree/master/end-user-app-test)
+
+Enjoy! :)
