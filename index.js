@@ -1,6 +1,6 @@
 const axios = require('axios')
 const md5 = require('md5')
-const { GLOBAL_CONFIG, setConfig } = require('./config')
+const { GLOBAL_CONFIG } = require('./config')
 
 const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [] }) {
   return axios.post(path, {
@@ -9,8 +9,8 @@ const __emit__ = function({ path, username, appname, createdAt, uuid, request, r
 }
 
 // 自动创建 createdAt
-const _emit = function({path, username, appname, uuid, labels = []}) {
-  return function({request, response, logger}) {
+const _emit = function({ path, username, appname, uuid, labels = [] }) {
+  return function({ request, response, logger }) {
     const createdAt = new Date()
     return __emit__({ path, username, appname, createdAt, uuid, request, response, logger, labels })
   }
@@ -19,7 +19,7 @@ const _emit = function({path, username, appname, uuid, labels = []}) {
 // 传递 path username appname labels
 // 自动创建 uuid
 const watcher = function(params={}) {
-  let {origin, username, appname, labels = []} = params
+  let { origin, username, appname, labels = [] } = params
 
   const uuid = md5(new Date().toString() + Math.random())
 
@@ -32,19 +32,19 @@ const watcher = function(params={}) {
 
   return {
     emitReq: function(request) {
-      let {url, headers, params, method, queries} = request
-      request = {url, headers, params, method, queries}
-      return _emit({path, username, appname, uuid, labels})({request})
+      let { url, headers, params, method } = request
+      request = { url, headers, params, method }
+      return _emit({ path, username, appname, uuid, labels })({ request })
     },
     emitRes: function(response) {
-      let {status, data, headers} = response
-      response = {status, data, headers}
-      return _emit({path, username, appname, uuid, labels})({response})
+      let { status, data, headers } = response
+      response = { status, data, headers }
+      return _emit({ path, username, appname, uuid, labels })({ response })
     },
     emitLog: function(logger) {
-      let {title, content} = logger
-      logger = {title, content}
-      return _emit({path, username, appname, uuid, labels})({logger})
+      let { title, content } = logger
+      logger = { title, content }
+      return _emit({ path, username, appname, uuid, labels })({ logger })
     }
   }
 }
@@ -59,7 +59,7 @@ watcher.logger = function(title, content) {
   }
   title = title.toString()
   const { emitLog } = watcher()
-  emitLog({title, content})
+  emitLog({ title, content })
 }
 
 watcher.use = function (watcherFunc) {
