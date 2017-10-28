@@ -52,6 +52,16 @@ const watcher = function(params={}) {
 // 将 watcher.global 作为一个 config 收集器
 watcher.global = GLOBAL_CONFIG
 
+// Logger
+watcher.logger = function(title, content) {
+  if (!content) {
+    content = title
+  }
+  title = title.toString()
+  const { emitLog } = watcher()
+  emitLog({title, content})
+}
+
 watcher.use = function (watcherFunc) {
   if (typeof watcherFunc === 'function') {
     watcherFunc(watcher)
