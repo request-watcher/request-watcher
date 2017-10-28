@@ -23,8 +23,6 @@ const watcher = function(params={}) {
 
   const uuid = md5(new Date().toString() + Math.random())
 
-  setConfig(watcher.global)
-
   origin = origin || GLOBAL_CONFIG.origin
   username = username || GLOBAL_CONFIG.username
   appname = appname || GLOBAL_CONFIG.appname
@@ -52,7 +50,7 @@ const watcher = function(params={}) {
 }
 
 // 将 watcher.global 作为一个 config 收集器
-watcher.global = {}
+watcher.global = GLOBAL_CONFIG
 
 watcher.use = function (watcherFunc) {
   if (typeof watcherFunc === 'function') {
