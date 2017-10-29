@@ -3,6 +3,7 @@ const GLOBAL_CONFIG = {
     appname: 'appname',
     origin: 'http://0.0.0.0:2333',
     labels: [],
+    save: false,
 }
 
 module.exports = {

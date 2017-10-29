@@ -2,24 +2,24 @@ const axios = require('axios')
 const md5 = require('md5')
 const { GLOBAL_CONFIG } = require('./config')
 
-const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [] }) {
+const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [], save }) {
   return axios.post(path, {
-    username, appname, createdAt, uuid, request, response, logger, labels
+    username, appname, createdAt, uuid, request, response, logger, labels, save
   })
 }
 
 // 自动创建 createdAt
-const _emit = function({ path, username, appname, uuid, labels = [] }) {
+const _emit = function({ path, username, appname, uuid, labels = [] }, save) {
   return function({ request, response, logger }) {
     const createdAt = new Date()
-    return __emit__({ path, username, appname, createdAt, uuid, request, response, logger, labels })
+    return __emit__({ path, username, appname, createdAt, uuid, request, response, logger, labels, save })
   }
 }
 
 // 传递 path username appname labels
 // 自动创建 uuid
 const watcher = function(params={}) {
-  let { origin, username, appname, labels = [] } = params
+  let { origin, username, appname, labels = [], save } = params
 
   const uuid = md5(new Date().toString() + Math.random())
 
@@ -27,6 +27,7 @@ const watcher = function(params={}) {
   username = username || GLOBAL_CONFIG.username
   appname = appname || GLOBAL_CONFIG.appname
   labels = labels || GLOBAL_CONFIG.labels
+  save = save || GLOBAL_CONFIG.save
 
   const path = origin + '/receiver'
 
