@@ -9,7 +9,7 @@ const __emit__ = function({ path, username, appname, createdAt, uuid, request, r
 }
 
 // 自动创建 createdAt
-const _emit = function({ path, username, appname, uuid, labels = [] }, save) {
+const _emit = function({ path, username, appname, uuid, labels = [], save}) {
   return function({ request, response, logger }) {
     const createdAt = new Date()
     return __emit__({ path, username, appname, createdAt, uuid, request, response, logger, labels, save })
@@ -35,17 +35,17 @@ const watcher = function(params={}) {
     emitReq: function(request) {
       let { url, headers, params, method } = request
       request = { url, headers, params, method }
-      return _emit({ path, username, appname, uuid, labels })({ request })
+      return _emit({ path, username, appname, uuid, labels, save })({ request })
     },
     emitRes: function(response) {
       let { status, data, headers } = response
       response = { status, data, headers }
-      return _emit({ path, username, appname, uuid, labels })({ response })
+      return _emit({ path, username, appname, uuid, labels, save })({ response })
     },
     emitLog: function(logger) {
       let { title, content } = logger
       logger = { title, content }
-      return _emit({ path, username, appname, uuid, labels })({ logger })
+      return _emit({ path, username, appname, uuid, labels, save })({ logger })
     }
   }
 }
