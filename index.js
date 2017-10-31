@@ -1,6 +1,5 @@
 const axios = require('axios')
 const md5 = require('md5')
-const R = require('ramda')
 
 const { GLOBAL_CONFIG } = require('./config')
 
@@ -56,16 +55,18 @@ const watcher = function(params={}) {
 watcher.global = GLOBAL_CONFIG
 
 // Logger
-const logger = (configs, title, content) => {
-  if (!content) {
-    content = title
+const logger = (configs) => {
+  return (title, content) => {
+    if (!content) {
+      content = title
+    }
+    title = title.toString()
+    const { emitLog } = watcher(configs)
+    emitLog({ title, content })
   }
-  title = title.toString()
-  const { emitLog } = watcher(configs)
-  emitLog({ title, content })
 }
 
-watcher.logger = R.curry(logger)
+watcher.logger = logger
 
 watcher.use = function (watcherFunc) {
   if (typeof watcherFunc === 'function') {
