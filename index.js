@@ -54,14 +54,16 @@ const watcher = function(params={}) {
 watcher.global = GLOBAL_CONFIG
 
 // Logger
-watcher.logger = function(title, content) {
+const logger = (configs, title, content) => {
   if (!content) {
     content = title
   }
   title = title.toString()
-  const { emitLog } = watcher()
+  const { emitLog } = watcher(configs)
   emitLog({ title, content })
 }
+
+watcher.logger = R.curry(logger)
 
 watcher.use = function (watcherFunc) {
   if (typeof watcherFunc === 'function') {
