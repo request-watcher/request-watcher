@@ -1,5 +1,7 @@
 const axios = require('axios')
 const md5 = require('md5')
+const R = require('ramda')
+
 const { GLOBAL_CONFIG } = require('./config')
 
 const __emit__ = function({ path, username, appname, createdAt, uuid, request, response, logger, labels = [], save }) {
