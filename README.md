@@ -103,7 +103,7 @@ emitLog(loggerParams)
 
 ```
 
-*Everytime you emit a logger need to regenerate a new emitLog function.* It's Inconvenient(indeed it's for plugin using), thus we supply a more convenient way to do same thing:
+*Notice! everytime you emit a logger need to regenerate a new emitLog function.* It's Inconvenient(indeed it's for plugin using), thus we supply a more convenient way to do same thing:
 
 ```javascript
 // Only define once
@@ -111,8 +111,9 @@ const watcherParams = {labels: ['log']}
 const logger = watcher.logger({watcherParams})
 
 // use everywhere
-const loggerParams = { title: 'logger', content: 'this is a log' }
-logger(loggerParams)
+logger('logger title', 'logger content')
+// or
+logger('logger content')
 ```
 
 #### loggerParams
