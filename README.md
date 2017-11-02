@@ -103,6 +103,18 @@ emitLog(loggerParams)
 
 ```
 
+*Everytime you emit a logger need to regenerate a new emitLog function.* It's Inconvenient(indeed it's for plugin using), thus we supply a more convenient way to do same thing:
+
+```javascript
+// Only define once
+const watcherParams = {labels: ['log']}
+const logger = watcher.logger({watcherParams})
+
+// use everywhere
+const loggerParams = { title: 'logger', content: 'this is a log' }
+logger(loggerParams)
+```
+
 #### loggerParams
 
 > loggerParams is an Object Containing the following properties
@@ -118,8 +130,8 @@ You can use `watcher.global` to define global params, and thus you can just use 
 
 ```javascript
 watcher.global.origin = 'http://127.0.0.1:8080' // default is 'http://0.0.0.0:2333'
-watcher.global.username = 'lisiur' // default is 'username'
-watcher.global.appname = 'test-app' // default is 'appname'
+watcher.global.username = 'request-watcher' // default is 'username'
+watcher.global.appname = 'request-watcher-app' // default is 'appname'
 
 const { emitReq, emitRes } = watcher()
 const { emitLog } = watcher()
@@ -127,9 +139,9 @@ const { emitLog } = watcher()
 
 ## Plugins
 
-We support plugin to simplify the configs. And now we have those plugins:
+We support plugin to simplify the configs. And now we have these plugins:
 
-- [request-watcher-axios](https://github.com/lisiur/request-watcher-axios)
+- [request-watcher-axios](https://github.com/request-watcher/request-watcher-axios)
 
 ### Plugin Usage
 
