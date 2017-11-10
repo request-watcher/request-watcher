@@ -60,6 +60,8 @@ const logger = (configs) => {
     if (!content) {
       content = title
     }
+    if (title === undefined) title = 'undefined'
+    if (title === null) title = 'null'
     title = title.toString()
     const { emitLog } = watcher(configs)
     emitLog({ title, content })
