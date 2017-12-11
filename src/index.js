@@ -78,5 +78,4 @@ watcher.use = function (watcherFunc) {
   }
 }
 
-export default watcher
-// module.exports = watcher
+module.exports = watcher
