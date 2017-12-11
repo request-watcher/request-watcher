@@ -2,7 +2,7 @@
   "name": "request-watcher",
   "version": "1.7.6",
   "description": "request-watcher",
-  "main": "dist/watcher.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"

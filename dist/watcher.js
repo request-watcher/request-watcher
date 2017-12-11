@@ -2059,6 +2059,9 @@ module.exports = function spread(callback) {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var axios = __webpack_require__(10);
 var md5 = __webpack_require__(12);
 
@@ -2186,7 +2189,8 @@ watcher.use = function (watcherFunc) {
   }
 };
 
-module.exports = watcher;
+exports.default = watcher;
+// module.exports = watcher
 
 /***/ }),
 /* 31 */
