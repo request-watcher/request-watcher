@@ -150,7 +150,7 @@ Using axios for example:
 
 ```javascript
 const watcher = require('request-watcher')
-watcher.use(require('request-watcher-axios'))
+watcher.use(require('request-watcher-axios')(axios))
 ```
 
 And then, you can just focus on your biz code without inserting redundant code before or after the ajaxing code.
@@ -161,6 +161,6 @@ And then, you can just focus on your biz code without inserting redundant code b
 
 ## Example
 
-Refer to this [example](https://github.com/request-watcher/request-watcher-example)
+Refer to this [example](https://github.com/request-watcher/example)
 
 Enjoy! :)
