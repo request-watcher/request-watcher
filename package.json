@@ -2,7 +2,7 @@
   "name": "request-watcher",
   "version": "1.7.8",
   "description": "request-watcher",
-  "main": "src/index.js",
+  "main": "lib/request-watcher.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
@@ -24,8 +24,10 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^2.2.1"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.14"
   }
 }

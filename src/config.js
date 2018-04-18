@@ -6,8 +6,4 @@ const GLOBAL_CONFIG = {
     save: false,
 }
 
-module.exports = {
-    get GLOBAL_CONFIG() {
-        return GLOBAL_CONFIG
-    },
-}
+export default GLOBAL_CONFIG
