@@ -33,13 +33,22 @@ function Watcher({origin, username, appname, labels, save} = GLOBAL_CONFIG) {
 
   return {
     emitReq({url, headers, params, method}) {
-      return emit({url, headers, params, method})
+      const request = {
+        url, headers, params, method
+      }
+      return emit({request})
     },
     emitRes({status, data, headers}) {
-      return emit({status, data, headers})
+      const response = {
+        status, data, headers
+      }
+      return emit({response})
     },
     emitLog({title, content}) {
-      return emit({title, content})
+      const logger = {
+        title, content
+      }
+      return emit({logger})
     }
   }
 }
