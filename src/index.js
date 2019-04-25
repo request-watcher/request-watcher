@@ -1,5 +1,3 @@
-import axios from 'axios'
-import md5 from 'md5'
 import GLOBAL_CONFIG from './config'
 
 /**
@@ -9,7 +7,13 @@ import GLOBAL_CONFIG from './config'
  * @returns promise
  */
 function __emit__({path, ...params}) {
-  return axios.post(path, params)
+  return fetch(path, {
+    headers: {
+      method: 'POST',
+      'Content-Type': 'application/json',
+      body: JSON.stringify(params)
+    }
+  })
 }
 
 
@@ -27,7 +31,7 @@ function _emit_({path, ...params}) {
 }
 
 function Watcher({origin, username, appname, labels, save} = GLOBAL_CONFIG) {
-  const uuid = md5(new Date().toString() + Math.random())
+  const uuid = Math.random().toString(36).substr(2)
   const path = origin + '/receiver'
   const emit = (params) => _emit_({path, username, appname, uuid, labels, save})(params)
 
