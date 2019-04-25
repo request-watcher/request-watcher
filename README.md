@@ -28,6 +28,27 @@ const axiosWatcher = require('request-watcher-axios')(axios)
 watcher.use(axiosWatcher)
 ```
 
+## Quick Start for using fetch
+
+install packages
+```bash
+$ npm install -g request-watcher-server
+$ npm install -D request-watcher
+$ npm install -D request-watcher-fetch
+```
+
+start server
+```bash
+$ rws
+$ open http://localhost:2333
+```
+
+inject watcher code
+```javascript
+const watcher = require('request-watcher')
+const fetchWatcher = require('request-watcher-fetch')(fetch)
+watcher.use(fetchWatcher)
+```
 
 ## Install
 
@@ -168,6 +189,7 @@ const { emitLog } = watcher()
 We support plugin to simplify the configs. And now we have these plugins:
 
 - [request-watcher-axios](https://github.com/request-watcher/request-watcher-axios)
+- [request-watcher-fetch](https://github.com/request-watcher/request-watcher-fetch)
 
 ### Plugin Usage
 
