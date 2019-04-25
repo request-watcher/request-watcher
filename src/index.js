@@ -11,8 +11,8 @@ function __emit__({path, ...params}) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      body: params
-    }
+    },
+    body: params
   })
 }
 
