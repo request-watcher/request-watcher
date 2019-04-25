@@ -4,8 +4,8 @@
   "description": "request-watcher",
   "main": "lib/request-watcher.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "preversion": "npm run build"
   },
   "repository": {
     "type": "git",

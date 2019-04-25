@@ -8,8 +8,8 @@ import GLOBAL_CONFIG from './config'
  */
 function __emit__({path, ...params}) {
   return fetch(path, {
+    method: 'POST',
     headers: {
-      method: 'POST',
       'Content-Type': 'application/json',
       body: params
     }
