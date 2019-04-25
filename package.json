@@ -1,6 +1,6 @@
 {
   "name": "request-watcher",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "request-watcher",
   "main": "lib/request-watcher.js",
   "scripts": {
